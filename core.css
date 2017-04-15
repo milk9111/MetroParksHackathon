@@ -12,3 +12,31 @@ body {
 h1, h2, h3, h4, h5, h6 {
 	color: gray;
 }
+
+.foot {
+    overflow: hidden;
+    text-align: center;
+	color: #000;
+}
+.foot:before,
+.foot:after {
+    background-color: #000;
+    content: "";
+    display: inline-block;
+    height: 1px;
+    position: relative;
+    vertical-align: middle;
+    width: 10%;
+}
+.foot:before {
+    right: 0.5em;
+    margin-left: -50%;
+}
+.foot:after {
+    left: 0.5em;
+    margin-right: -50%;
+}
+
+footer {
+	padding-top: 80px;
+}
