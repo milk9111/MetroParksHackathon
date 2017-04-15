@@ -23,40 +23,61 @@
         #map {
             padding: 0;
         }
-
     </style>
 
     <script src="https://js.arcgis.com/3.20/"></script>
-   <script>
-require([
-    "esri/map",
-    "esri/layers/FeatureLayer",
-    "dojo/domReady!"
-  ],
-  function(
-    Map,
-    FeatureLayer
-  ) {
+    <script>
+        require([
+            "esri/map", "esri/layers/FeatureLayer",
+            "esri/symbols/SimpleFillSymbol", "esri/symbols/SimpleLineSymbol",
+            "esri/renderers/SimpleRenderer", "esri/graphic", "esri/lang",
+            "esri/Color", "dojo/number", "dojo/dom-style",
+            "dijit/TooltipDialog", "dijit/popup", "dojo/domReady!"
+        ],
+            function (
+                Map, FeatureLayer,
+                SimpleFillSymbol, SimpleLineSymbol,
+                SimpleRenderer, Graphic, esriLang,
+                Color, number, domStyle,
+                TooltipDialog, dijitPopup
+            ) {
 
-    var map = new Map("map", {
-      basemap: "terrain",
-      center: [-122.4562771, 47.2665655],
-      zoom: 12
-    });
+                var map = new Map("map", {
+                    basemap: "terrain",
+                    center: [-122.4562771, 47.2665655],
+                    zoom: 12
+                });
 
-    /****************************************************************
-     * Add feature layer - A FeatureLayer at minimum should point
-     * to a URL to a feature service or point to a feature collection 
-     * object.
-     ***************************************************************/
+                /****************************************************************
+                 * Add feature layer - A FeatureLayer at minimum should point
+                 * to a URL to a feature service or point to a feature collection 
+                 * object.
+                 ***************************************************************/
 
-    // Carbon storage of trees in Warren Wilson College.
-    var featureLayer = new FeatureLayer("https://services1.arcgis.com/WGzzp37bqYMLyzDR/arcgis/rest/services/AGOLHackathon1/FeatureServer/5");
+                // Carbon storage of trees in Warren Wilson College.
+                var featureLayer = new FeatureLayer("https://services1.arcgis.com/WGzzp37bqYMLyzDR/arcgis/rest/services/AGOLHackathon1/FeatureServer/5");
 
-    map.addLayer(featureLayer);
+                var highlightSymbol = new SimpleFillSymbol(
+                    SimpleFillSymbol.STYLE_SOLID,
+                    new SimpleLineSymbol(
+                        SimpleLineSymbol.STYLE_SOLID,
+                        new Color([255, 0, 0]), 3
+                    ),
+                    new Color([125, 125, 125, 0.35])
+                );
 
-  });
-</script>
+                featureLayer.on("mouse-over", function (evt) {
+                    var highlightGraphic = new Graphic(evt.graphic.geometry, highlightSymbol);
+                    map.graphics.add(highlightGraphic);
+                });
+
+                featureLayer.on("mouse-out", function (evt) {
+                    map.graphics.clear();
+                });
+                
+                map.addLayer(featureLayer);
+            });
+    </script>
 </head>
 
 
