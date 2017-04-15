@@ -5,8 +5,15 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
     <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <title>Basemap gallery</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/bootstrap.css" rel="stylesheet">
+	<link href="css/bootstrap-theme.css" rel="stylesheet">
+	<link href="css/bootstrap-theme.min.css" rel="stylesheet">
+	
+	<link href="core.css" rel="stylesheet">
+	
+    <title>Metro Parks</title>
+	
     <link rel="stylesheet" href="https://js.arcgis.com/3.20/dijit/themes/claro/claro.css">
     <link rel="stylesheet" href="https://js.arcgis.com/3.20/esri/css/esri.css">
     <link rel="stylesheet" type="text/css" href="./CSS/parkStyle.css">
@@ -51,7 +58,7 @@
                         SimpleLineSymbol.STYLE_SOLID,
                         new Color([255, 0, 0]), 3
                     ),
-                    new Color([125, 125, 125, 0.35])
+                    new Color([0, 0, 0, 0])
                 );
                 featureLayer.on("mouse-over", function(evt) {
                     var highlightGraphic = new Graphic(evt.graphic.geometry, highlightSymbol);
@@ -69,61 +76,91 @@
 
 
 <body>
-    <nav class="navbar navbar-default" role="navigation">
-        <div class="container">
-            <ul class="nav navbar-nav navbar-right form-inline" role="login">
-                <div class="form-group">
-                    <label class="sr-only" for="email">Email Address</label>
-                    <input class="form-control" type="email" id="email" placeholder="Email">
-                </div>
-                <div class="form-group">
-                    <label class="sr-only" for="password">Password</label>
-                    <input class="form-control" type="password" id="password" placeholder="Password">
-                </div>
-                <button class="btn btn-info" type="submit">Sign in</button>
-
-        </div>
-        </ul>
-        </div>
-    </nav>
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-1 nopadding" style="background-color:lavender;">
-                <div class="list-group">
-                    <a href="#" class="list-group-item list-group-item active">T1</a>
-                    <a href="#" class="list-group-item list-group-item-action">T2</a>
-                    <a href="#" class="list-group-item list-group-item-action">T3</a>
-                    <a href="#" class="list-group-item list-group-item-action">T4</a>
-                    <a href="#" class="list-group-item list-group-item-action">T5</a>
-                    <a href="#" class="list-group-item list-group-item-action">T6</a>
-                    <a href="#" class="list-group-item list-group-item-action">T7</a>
-                </div>
-            </div>
-            <div class="col-sm-6 nopadding" id="theMap" style="background-color:lavenderblush;">
-                <div class="claro">
-                    <div data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="design:'headline', gutters:false" style="width:100%;height:100%;margin:0;">
-                        <div id="map" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'center'" style="padding:0;">
-                            <div style="position:absolute; right:20px; top:10px; z-Index:999;"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4 nopadding" style="background-color:lavender;">
-                <div class="panel panel-success">
-                    <div class="panel-heading">Description</div>
-                    <div class="panel-body">
-                        Trail1 xxxx
-                    </div>
-                </div>
-                <div class="panel panel-success">
-                    <div class="panel-heading">Badget to Earn</div>
-                    <div class="panel-body">
-                        badge one
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="index.html">Metro Parks</a>
+			</div>
+			<ul class="nav navbar-nav">
+				
+			</ul>
+			<ul class="nav navbar-nav pull-right">
+				<li><a href="profile.html">Profile</a></li>
+				<li><a href="#">Logout</a></li>
+			</ul>
+	    </div>
+	</nav>
+	
+	<div id="centerPiece">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-1 nopadding" style="background-color:lavender;"  width="50px">
+					<div class="list-group">
+						<a href="#" class="list-group-item list-group-item active">Indian Bar Trail</a>
+						<a href="#" class="list-group-item list-group-item-action">Chinook Pass</a>
+						<a href="#" class="list-group-item list-group-item-action">Tipsoo Lake Trail</a>
+						<a href="#" class="list-group-item list-group-item-action">Puyallup Trail</a>
+						<a href="#" class="list-group-item list-group-item-action">Glacier View Trail</a>
+						<a href="#" class="list-group-item list-group-item-action">Peak Two Trail</a>
+						<a href="#" class="list-group-item list-group-item-action">Lyle Lake Trail</a>
+					</div>
+				</div>
+				<div class="col-sm-6 nopadding" id="theMap" style="background-color:lavenderblush;">
+					<div class="claro">
+						<div data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="design:'headline', gutters:false" style="width:100%;height:100%;margin:0;">
+							<div id="map" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'center'" style="padding:0;">
+								<div style="position:absolute; right:20px; top:10px; z-Index:999;"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-4 nopadding" style="background-color:lavender;">
+					<div class="panel panel-success">
+						<div class="panel-heading">Description</div>
+						<div class="panel-body">
+							<p>
+							<b>Type:</b> Paved <br>
+							<b>Length:</b> 7.7 mi <br>
+							<b>Max Elevation:</b> 5914 ft <br>
+							</p>
+						</div>
+					</div>
+					<div class="panel panel-success">
+						<div class="panel-heading">Badges to Earn</div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-xs-1"></div>
+								<div class="col-xs-2">
+									<img src="pics/waves.png" class="img-rounded" alt="River Badge" width="50" height="50" data-toggle="tooltip" title="Hiked a River Trail">
+								</div>
+								<div class="col-xs-1"></div>
+								<div class="col-xs-2">
+									<img src="pics/mountains.png" class="img-rounded" alt="Thin Air Badge" width="50" height="50" data-toggle="tooltip" title="Climbed a High Elevation">
+								</div>
+								
+							</div>
+							<div class="row"><div class="col-xs-1"></div></div>
+							<button type="button" class="btn btn-success">Collect Badges</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<footer class="container-fluid text-center">
+		<p class="foot">Metro Parks 2017</p>
+	</footer>
+	
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('[data-toggle="tooltip"]').tooltip();
+		});
+	</script>
 </body>
 
 </html>

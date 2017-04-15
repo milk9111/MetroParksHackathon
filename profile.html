@@ -17,6 +17,30 @@
 	<link href="css/bootstrap-theme.min.css" rel="stylesheet">
 	
 	<link href="core.css" rel="stylesheet">
+	
+	<!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"> </script>
+	<script>
+
+		$(function() {
+
+
+			var people = [];
+
+			$.getJSON('user.json', function(data) {
+			   $.each(data.user, function(i, f) {
+					var username = "<h1>" + f.name + "</h1>"
+					var heading = username + "<hr>"
+				    $(heading).appendTo("#userInfo div");
+					
+					var river = "<span class=\"badge\">" + f.badges[0] + "</span>"
+					console.log("badges[0] is " + river);
+					$(river).appendTo("#riv div");
+				});
+
+			});
+
+		});
+	</script>-->
   </head>
 
     <nav class="navbar navbar-default">
@@ -37,7 +61,8 @@
   <body>
     <div class="container">
 	  <div class="col-xs-6 col-lg-4">
-		<h1>Connor</h1>
+		<!--<h1>Connor</h1>-->
+		<h1 id="userInfo"></h1>
 		<hr>
 	  </div>
     </div><!--/.container-->
@@ -67,16 +92,16 @@
 						<div class="row">
 							<div class="col-lg-2"></div>
 							<div class="col-xs-2">
-								<p><span class="badge">5</span></p>
+								<p><span class="badge" id="riv"></span></p>
 							</div>
 							<div class="col-xs-2">
-								<p><span class="badge">0</span></p>
+								<p><span class="badge" id="mount"></span></p>
 							</div>
 							<div class="col-xs-2">
-								<p><span class="badge">1</span></p>
+								<p><span class="badge" id="long"></span></p>
 							</div>
 							<div class="col-xs-2">
-								<p><span class="badge">12</span></p>
+								<p><span class="badge" id="bridge"></span></p>
 							</div>
 						</div>
 					</div>
@@ -89,7 +114,7 @@
 					<div class="container">
 						<div class="row">
 							<div class="col-xs-1.25">
-								<h3>Hobbyist</h3>
+								<h3 id="rank"></h3>
 							</div>
 							<div class="col-xs-1">
 								<img src="pics/hobbyist.png" class="img-rounded" alt="Bicycle" width="50" height="50">
@@ -99,13 +124,13 @@
 					<br>
 					<br>
 					<div class="container-fluid text-center">
-						<div class="col-xs-0">
-							<div class="progress" style="width:50%"> <!--/.progress bar-->
+						<div class="col-xs-0" id="exp">
+							<!--<div class="progress" style="width:50%">
 								<div class="progress-bar" role="progressbar" aria-valuenow="50"
-									aria-valuemin="0" aria-valuemax="50" style="width:75%">
+									aria-valuemin="0" aria-valuemax="50" style="width:50%">
 									<span class="progress-value">Expert</span>
 								</div> 
-							</div> <!--/.progress bar-->
+							</div>-->
 						</div>
 					</div>
 				</div>
@@ -130,5 +155,30 @@
 		});
 	</script>
 	
+	<script>
+	function myFunction(arr) {
+		var name = arr[0].name;
+		var email = arr[0].email;
+		var badges = arr[0].badges;
+		var rank = arr[0].rank;
+		var exp = arr[0].exp;
+		
+		var progressBar = "<div class=\"progress\" style=\"width:" + exp +"%\">" + 
+								"<div class=\"progress-bar\" role=\"progressbar\" aria-valuenow=\"50\"" + 
+									"aria-valuemin=\"0\" aria-valuemax=\"50\" style=\"width:" + exp + "%\">" + 
+									"<span class=\"progress-value\">Expert</span>" + 
+								"</div> " +
+							"</div>"
+		
+		document.getElementById("userInfo").innerHTML = name;
+		document.getElementById("riv").innerHTML = badges[0];
+		document.getElementById("mount").innerHTML = badges[1];
+		document.getElementById("long").innerHTML = badges[2];
+		document.getElementById("bridge").innerHTML = badges[3];
+		document.getElementById("rank").innerHTML = rank;
+		document.getElementById("exp").innerHTML = progressBar;
+	}
+	</script>
+	<script src="userInfo.js"></script>
   </body>
 </html>

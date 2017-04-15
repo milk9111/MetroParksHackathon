@@ -13,6 +13,15 @@ h1, h2, h3, h4, h5, h6 {
 	color: gray;
 }
 
+p {
+	color: darkgray;
+}
+
+#centerPiece {
+	padding-left: 10%;
+	padding-top: 7.5%;
+}
+
 .foot {
     overflow: hidden;
     text-align: center;
@@ -38,5 +47,5 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 footer {
-	padding-top: 80px;
+	padding-top: 10.5%;
 }
