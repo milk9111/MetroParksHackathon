@@ -1,67 +1,128 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
-		<link rel="stylesheet" href="https://js.arcgis.com/4.3/esri/css/main.css">
-		<script src="https://js.arcgis.com/4.3/"></script>
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="./CSS/parkStyle.css">
 
-		<title>Metro Park Trails</title>
-	</head>
-	<body>
-		<nav class="navbar navbar-default" role="navigation">
-			<div class="container">
-				<ul class="nav navbar-nav navbar-right form-inline" role="login">
-					<div class="form-group">
-                        <label class="sr-only" for="email">Email Address</label>
-                        <input class="form-control" type="email" id="email" placeholder="Email">
-                    </div>
-                    <div class="form-group">
-                        <label class="sr-only" for="password">Password</label>
-                        <input class="form-control" type="password" id="password" placeholder="Password">
-                    </div>
-                    <button class="btn btn-info" type="submit">Sign in</button>
-                    	
-                    </div>
-				</ul>
-			</div>
-		</nav>
-		<div class="container">
-			<div class="row" >
-				<div class="col-sm-1 nopadding" style="background-color:lavender;">
-					<div class="list-group">
-					  <a href="#" class="list-group-item list-group-item active">T1</a>
-					  <a href="#" class="list-group-item list-group-item-action">T2</a>
-					  <a href="#" class="list-group-item list-group-item-action">T3</a>
-					  <a href="#" class="list-group-item list-group-item-action">T4</a>
-					  <a href="#" class="list-group-item list-group-item-action">T5</a>
-					  <a href="#" class="list-group-item list-group-item-action">T6</a>
-					  <a href="#" class="list-group-item list-group-item-action">T7</a>
-					</div>
-				</div>
-				<div class="col-sm-6 nopadding" style="background-color:lavenderblush;">
-					mid
-				</div >
-				<div class="col-sm-4 nopadding" style="background-color:lavender;" >	
-					<div class="panel panel-success">
-					  <div class="panel-heading">Description</div>
-					  <div class="panel-body">
-					    Trail1 xxxx
-					  </div>
-					</div>
-					<div class="panel panel-success">
-					  <div class="panel-heading">Badget to Earn</div>
-					  <div class="panel-body">
-					    badge one
-					  </div>
-					</div>	
-				</div>
-			</div>
-		</div>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <title>Basemap gallery</title>
+    <link rel="stylesheet" href="https://js.arcgis.com/3.20/dijit/themes/claro/claro.css">
+    <link rel="stylesheet" href="https://js.arcgis.com/3.20/esri/css/esri.css">
+    <link rel="stylesheet" type="text/css" href="./CSS/parkStyle.css">
+    <script src="https://js.arcgis.com/3.20/"></script>
+    <script>
+        require([
+            "esri/map", 
+            "esri/layers/FeatureLayer",
+            "esri/symbols/SimpleFillSymbol", "esri/symbols/SimpleLineSymbol",
+            "esri/renderers/SimpleRenderer", 
+            "esri/graphic", 
+            "esri/lang",
+            "esri/Color", 
+            "dojo/number", 
+            "dojo/dom-style",
+            "dijit/TooltipDialog",
+            "dijit/popup",
+            "dojo/domReady!"
+        ],
+            function (
+                Map, FeatureLayer,
+                SimpleFillSymbol, SimpleLineSymbol,
+                SimpleRenderer, Graphic, esriLang,
+                Color, number, domStyle,
+                TooltipDialog, dijitPopup
+            ) {
+                var map = new Map("map", {
+                    basemap: "gray",
+                    center: [-122.4562771, 47.2665655],
+                    zoom: 12
+                });
+                /****************************************************************
+                 * Add feature layer - A FeatureLayer at minimum should point
+                 * to a URL to a feature service or point to a feature collection 
+                 * object.
+                 ***************************************************************/
+                // Carbon storage of trees in Warren Wilson College.
+                var featureLayer = new FeatureLayer("https://services1.arcgis.com/WGzzp37bqYMLyzDR/arcgis/rest/services/AGOLHackathon1/FeatureServer/5");
+                var highlightSymbol = new SimpleFillSymbol(
+                    SimpleFillSymbol.STYLE_SOLID,
+                    new SimpleLineSymbol(
+                        SimpleLineSymbol.STYLE_SOLID,
+                        new Color([255, 0, 0]), 3
+                    ),
+                    new Color([125, 125, 125, 0.35])
+                );
+                featureLayer.on("mouse-over", function (evt) {
+                    var highlightGraphic = new Graphic(evt.graphic.geometry, highlightSymbol);
+                    map.graphics.add(highlightGraphic);
+                });
+                featureLayer.on("mouse-out", function (evt) {
+                    map.graphics.clear();
+                });
+                
+                map.addLayer(featureLayer);
+            });
+    </script>
+</head>
 
-	</body>
-	<script type="text/javascript" src="./js/trails.js"></script>
+
+<body>
+   <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <ul class="nav navbar-nav navbar-right form-inline" role="login">
+                <div class="form-group">
+                    <label class="sr-only" for="email">Email Address</label>
+                    <input class="form-control" type="email" id="email" placeholder="Email">
+                </div>
+                <div class="form-group">
+                    <label class="sr-only" for="password">Password</label>
+                    <input class="form-control" type="password" id="password" placeholder="Password">
+                </div>
+                <button class="btn btn-info" type="submit">Sign in</button>
+                    
+                </div>
+            </ul>
+        </div>
+    </nav>
+        <div class="container">
+            <div class="row" >
+                <div class="col-sm-1 nopadding" style="background-color:lavender;">
+                    <div class="list-group">
+                      <a href="#" class="list-group-item list-group-item active">T1</a>
+                      <a href="#" class="list-group-item list-group-item-action">T2</a>
+                      <a href="#" class="list-group-item list-group-item-action">T3</a>
+                      <a href="#" class="list-group-item list-group-item-action">T4</a>
+                      <a href="#" class="list-group-item list-group-item-action">T5</a>
+                      <a href="#" class="list-group-item list-group-item-action">T6</a>
+                      <a href="#" class="list-group-item list-group-item-action">T7</a>
+                    </div>
+                </div>
+                <div class="col-sm-6 nopadding" id="theMap" style="background-color:lavenderblush;">
+                       <div class="claro">
+                            <div data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="design:'headline', gutters:false" style="width:100%;height:100%;margin:0;">
+                            <div id="map" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'center'" style="padding:0;">
+                                <div style="position:absolute; right:20px; top:10px; z-Index:999;"></div>
+                            </div>
+                        </div>
+                </div>
+                </div >
+                <div class="col-sm-4 nopadding" style="background-color:lavender;" >    
+                    <div class="panel panel-success">
+                      <div class="panel-heading">Description</div>
+                      <div class="panel-body">
+                        Trail1 xxxx
+                      </div>
+                    </div>
+                    <div class="panel panel-success">
+                      <div class="panel-heading">Badget to Earn</div>
+                      <div class="panel-body">
+                        badge one
+                      </div>
+                    </div>  
+                </div>
+            </div>
+        </div>    
+</body>
+
 </html>
-
